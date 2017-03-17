@@ -1,0 +1,52 @@
+@import "variables"
+@import "mixins"
+
+*, *:after, *:before
+  margin: 0
+  padding: 0
+  @include border-box
+
+
+img
+  width: auto
+  max-width: 100%
+  height: auto !important
+
+
+.container
+  width: 100%
+  margin: 0 auto
+
+
+.container, .row
+  @extend %clearfix
+
+
+[class*='cl-']
+  float: left
+  width: 100%
+  min-height: 1px
+
+@media #{$breakpoint-large}
+  .container
+    width: 95%
+    max-width: $grid-max-width + 150px
+    @for $i from 1 through $grid-columns
+      .cl-#{$i}
+        width: 100% / $grid-columns * $i
+
+@media #{$breakpoint-medium}
+  .container
+    width: 100%
+    max-width: $grid-max-width
+    @for $i from 1 through $grid-columns
+      .cl-#{$i}
+        width: 100% / $grid-columns * $i
+
+@media #{$breakpoint-small}
+  .container
+    width: 100%
+    max-width: $grid-max-width
+    @for $i from 1 through $grid-columns
+      .cl-s-#{$i}
+        width: 100% / $grid-columns * $i
