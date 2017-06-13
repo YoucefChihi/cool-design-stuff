@@ -1,0 +1,78 @@
+$tooltip-bg: salmon
+$tooltip-text: white
+$tooltip-width: 200px
+$edge-size: 30px
+
+.tooltip-wrap
+  position: relative
+  &:hover
+    .item
+      &:before
+        display: initial
+    .tooltip
+      display: initial
+  .item
+    position: relative
+    &:before
+      content: ""
+      position: absolute
+      bottom: -10px
+      left: calc(50% - 10px)
+      border-bottom: 10px solid $tooltip-bg
+      border-left: 10px solid transparent
+      border-right: 10px solid transparent
+      animation: topdown .3s
+      display: none
+    .btn
+      background: cornflowerblue
+      padding: 10px 20px
+      color: white
+      border-radius: 2px
+      cursor: pointer
+  .tooltip
+    position: absolute
+    margin-top: 9px
+    left: calc(50% - #{$tooltip-width/2} - #{$edge-size/2})
+    display: none
+    padding: $edge-size/2
+    width: $tooltip-width
+    text-align: center
+    overflow: hidden
+    border-radius: 2px
+    animation: topdown .3s
+    color: $tooltip-text
+    &:after
+      animation: spread .6s
+      animation-fill-mode: forwards
+      content: ""
+      position: absolute
+      bottom: 0px
+      z-index: -1
+      border-top: $edge-size solid $tooltip-bg
+      border-left: $edge-size solid transparent
+      border-right: $edge-size solid transparent
+
+      height: 0
+      transition: all .3s
+    &:before
+      content: ""
+      position: absolute
+      bottom: $edge-size
+      left: 0
+      z-index: -1
+      width: 100%
+      height: 100%
+      background: $tooltip-bg
+  
+@keyframes topdown
+  0%
+    transform: translateY(-50px)
+    opacity: 0
+  
+@keyframes spread
+  0%
+    width: $tooltip-width - $edge-size
+    left: 0
+  100%
+    left: -$edge-size
+    width: $tooltip-width + $edge-size
